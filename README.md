@@ -8,9 +8,9 @@ This is quite a challenge.
 
 But I got this far. :)
 
-Here is a link to the video:
+Here is a link to the video: https://drive.google.com/file/d/1Gpqp7ZvCR6lQhwSscN8OGX5i2MShWXjA/view
 
-Here is a link to the repo:
+Here is a link to the repo:https://github.com/smckelli/team-profile-gen
 
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for my team members and their information
