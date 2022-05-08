@@ -4,96 +4,92 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
 
-const employees = [];
+const team = [];
 
 
-function initApp() {
-    startHTML();
-    add2Team();
+function warning() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "stopGo",
+            message: "You are entering a classified system. Are yousure you want to do this?",
+            choices: ["Yes, but that guy is looking at me funny.", "Nope, I'm outta here."]
+        }
+    ])
+    .then (function(data) {
+
+        switch(data.stopGo) {
+            case "Yes, but that guy is looking at me funny.":
+                team.push("Placeholder")
+                // console.log(team);
+                addTeam();
+                break;
+
+            case "Nope, I'm outta here.":
+                console.log("Good choice.");
+        }
+
+    })
+}
+function addTeam() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "addTeamMate",
+            message: "Are you adding to the A Team?",
+            choices: ["Yes, add a Manager!", "Yes, add an Engineer!", "Yes, add an Intern!", "No, we are currently recruiting."],
+        }
+    ])
+    .then(function(data) {
+
+        switch (data.addTeamMate) {
+            case "Yes, add a Manager!":
+                // console.log("Manager!");
+                addManager();
+                break;
+            
+            case "Yes, add an Engineer!":
+                // console.log("Engineer!");
+                addEngineer();
+                break;
+
+            case "Yes, add an Intern!":
+                // console.log("Intern!");
+                addIntern();
+                break;
+
+            case "No, we are currently recruiting.":
+                // console.log("No thanks!");
+                assembleTeam();
+                break;
+        }
+
+    });
 }
 
-
-function add2Team() {
-    inquirer.prompt([{
-                type: "text",
-                name: "name",
-                message: "Who are you adding to the team?"
-            },
-            {
-                type: "list",
-                name: "role",
-                message: "What is this person's role?",
-                choices: [
-                    "Manager",
-                    "Engineer",
-                    "Intern",
-                ],
-            },
-            {
-                type: "text",
-                name: "id",
-                message: "Enter this person's emplyee ID"
-
-            },
-            {
-                type: "text",
-                name: "email",
-                message: "What is this person's email?",
-            }
-        ])
-        .then(function ({
-            name,
-            role,
-            id,
-            email
-        }) {
-            let roleInfo = "";
-            if (role === "Engineer") {
-                roleInfo = "Github username";
-            } else if (role === "Intern") {
-                roleInfo = "school name";
-            } else if (role === "Manager") {
-                roleInfo = "office number";
-            }
-            inquirer.prompt([{
-                        type: "text",
-                        message: `Enter this person's ${roleInfo}`,
-                        name: "roleInfo"
-                    },
-                    {
-                        type: "list",
-                        name: "addTeam",
-                        message: "Do you want to add more people to the team?",
-                        choices: [
-                            "yes",
-                            "no"
-                        ],
-                    }
-                ])
-                .then(function ({
-                    roleInfo,
-                    addTeam
-                }) {
-                    let newTeammate;
-                    if (role === "Engineer") {
-                        newTeammate = new Engineer(name, id, email, roleInfo);
-                    } else if (role === "Intern") {
-                        newTeammate = new Intern(name, id, email, roleInfo);
-                    } else if (role === "Manager") {
-                        newTeammate = new Manager(name, id, email, roleInfo);
-                    }
-                    employees.push(newTeammate);
-
-
-                    // .then(function () {
-                    // if (addTeam === "yes") {
-                    //     add2Team();
-                    // } else {
-                    //     endHTML();
-                    // }
-                })
-            })
+function addManager() {
+    inquirer.prompt([
+        {
+            type: "text",
+            name: "name",
+            message: "What's the boss's name?",
+        },
+        {
+            type: "text",
+            name: "email",
+            message: "What's the boss's email address?",
+        },
+        {
+            type: "text",
+            name: "officeNumber",
+            message: "What's the boss's office number?",
         }
+    ])
+    .then(function(data) {
+        const name = data.name
+        const id 
+    })
+}
 
 
 function startHTML() {
@@ -194,4 +190,4 @@ function endHTML() {
     });
 }
 
-initApp();
+warning();
