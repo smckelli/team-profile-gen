@@ -64,7 +64,7 @@ function addTeam() {
                 break;
         }
 
-    });
+    })
 }
 
 function addManager() {
@@ -87,7 +87,73 @@ function addManager() {
     ])
     .then(function(data) {
         const name = data.name
-        const id 
+        const id = team.length
+        console.log(team.length)
+        const email = data.email
+        const office = data.office
+        const teamMate = new Engineer(name, id, email, office)
+        team.push(teamMate)
+        addTeam();
+    })
+}
+
+function addEngineer() {
+    inquirer.prompt([
+        {
+            type: "text",
+            name: "name",
+            message: "Who is your engineer?",
+        },
+        {
+            type: "text",
+            name: "email",
+            message: "What's your engineer's email address?",
+        },
+        {
+            type: "text",
+            name: "github",
+            message: "What's your engineer's github username?",
+        }
+    ])
+    .then(function(data) {
+        const name = data.name
+        const id = team.length
+        console.log(team.length)
+        const email = data.email
+        const github = data.github
+        const teamMate = new Engineer(name, id, email, github)
+        team.push(teamMate)
+        addTeam();
+    })
+}
+
+function addIntern() {
+    inquirer.prompt([
+        {
+            type: "text",
+            name: "name",
+            message: "Who is your intern?",
+        },
+        {
+            type: "text",
+            name: "email",
+            message: "What's your intern's email address?",
+        },
+        {
+            type: "text",
+            name: "school",
+            message: "Where did your intern go to school?",
+        }
+    ])
+    .then(function(data) {
+        const name = data.name
+        const id = team.length
+        console.log(team.length)
+        const email = data.email
+        const school = data.school
+        const teamMate = new Intern(name, id, email, school)
+        team.push(teamMate)
+        addTeam();
     })
 }
 
@@ -111,21 +177,10 @@ function startHTML() {
             <span class="navbar-brand mb-0 h1 w-100 p-4 text-center">The A Team Profile</span>
         </nav>
         <div class = "container-md row mx-auto">`
-    fs.writeFile("./generated/team.html", html, function (err) {
-        if (err) {
-            console.log(err);
-        }
-    });
-    console.log("start");
 }
 
 
 function addHtml(member) {
-    return new Promise(function (resolve, reject) {
-                const name = member.getName();
-                const role = member.getRole();
-                const id = member.getId();
-                const email = member.getEmail();
                 let data = "";
                 if (role === "Engineer") {
                     const gitHub = member.getGithub();
@@ -176,7 +231,7 @@ function addHtml(member) {
                 };
                 return resolve();
             })
-})};
+}
 
 function endHTML() {
     const html = `    </div>
