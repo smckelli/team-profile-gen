@@ -72,11 +72,6 @@ function addTeam() {
 
 function addManager() {
     inquirer.prompt([
-        // {
-        //     type: "list",
-        //     name: "title"
-        //     message:
-        // }
         {
             type: "text",
             name: "name",
@@ -136,10 +131,25 @@ function addEngineer() {
             type: "text",
             name: "github",
             message: "What's your engineer's github username?",
+        },
+        {
+            type: "list",
+            name: "title",
+            message: "Is the information you entered correct?",
+            choices: [
+                "yes",
+                "no"
+            ]
         }
     ])
     .then(function(data) {
         const name = data.name
+        if (team.title = "yes") {
+            team.title = "Engineer"
+        } else {
+            addEngineer();
+        }
+        console.log(team.title)
         const id = team.length
         console.log(team.length)
         const email = data.email
@@ -166,10 +176,25 @@ function addIntern() {
             type: "text",
             name: "school",
             message: "Where did your intern go to school?",
+        },
+        {
+            type: "list",
+            name: "title",
+            message: "Is the information you entered correct?",
+            choices: [
+                "yes",
+                "no"
+            ]
         }
     ])
     .then(function(data) {
         const name = data.name
+        if (team.title = "yes") {
+            team.title = "Intern"
+        } else {
+            addIntern();
+        }
+        console.log(team.title)
         const id = team.length
         console.log(team.length)
         const email = data.email
