@@ -84,7 +84,7 @@ function addManager() {
         },
         {
             type: "text",
-            name: "officeNumber",
+            name: "office",
             message: "What's the boss's office number?",
         },
         {
@@ -99,20 +99,24 @@ function addManager() {
     ])
     .then(function(data) {
         const name = data.name
-        if (team.title = "yes") {
+        console.log(data.name)
+        if (data.title = "yes") {
             team.title = "Manager"
         } else {
             addManager();
         }
-        console.log(team.title)
+        console.log(data.title)
         const id = team.length
         console.log(team.length)
         const email = data.email
+        console.log(data.email)
         const office = data.office
+        console.log(data.office)
         const teamMate = new Manager(name, id, email, office)
         team.push(teamMate)
         addTeam();
     });
+    
 };
 
 function addEngineer() {
@@ -144,12 +148,12 @@ function addEngineer() {
     ])
     .then(function(data) {
         const name = data.name
-        if (team.title = "yes") {
-            team.title = "Engineer"
+        if (data.title = "yes") {
+            data.title = "Engineer"
         } else {
             addEngineer();
         }
-        console.log(team.title)
+        console.log(data.title)
         const id = team.length
         console.log(team.length)
         const email = data.email
@@ -205,129 +209,71 @@ function addIntern() {
     });
 };
 
-// function assembleTeam() {
+function assembleTeam() {
 
-//     const pageArray = []
-//     const mainHTML = `
-//     <!DOCTYPE html>
-//     <html lang="en">
+    const pageArray = []
+    const mainHTML = `
+    <!DOCTYPE html>
+    <html lang="en">
     
-//     <head>
-//         <meta charset="UTF-8">
-//         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         <!-- CSS only -->
-//         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-//             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-//         <title>The A Team</title>
-//     </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <title>The A Team</title>
+    </head>
     
-//     <body>
-//         <nav class="navbar navbar-dark bg-danger mb-5">
-//             <span class="navbar-brand mb-0 h1 w-100 p-4 text-center">The A Team Profile</span>
-//         </nav>
-//         <div class = "container-md row mx-auto">
-//     `
-//     assembleTeam.push(mainHTML);
+    <body>
+        <nav class="navbar navbar-dark bg-danger mb-5">
+            <span class="navbar-brand mb-0 h1 w-100 p-4 text-center">The A Team Profile</span>
+        </nav>
+        <div class = "container-md row mx-auto">
+    `
+    pageArray.push(mainHTML);
 
-//     for (let i = 1; i < team.length; i++) {
-//         let card = `
-//         <div class = "col-4">
-//             <div class="card mb-3" style="width: 18rem;">
-//                 <strong class="card-header bg-warning p-3 text-center">
-//                 ${team.name}<br/>Engineer<br/>
-//                 </strong>
-//                 <ul class="list-group list-group-flush">
-//                     <li class="list-group-item">ID : ${id}</li>
-//                     <li class="list-group-item">Email Address: ${email}</li>
-//         `
-//     }
+    for (let i = 1; i < team.length; i++) {
+        let card = `
+        <div class = "col-4">
+            <div class="card mb-3" style="width: 18rem;">
+                <strong class="card-header bg-warning p-3 text-center">
+                ${team[i].name}<br/>${team[i].title}<br/>
+                </strong>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID : ${team[i].id}</li>
+                    <li class="list-group-item">Email Address: ${team[i].email}</li>
+        `
+                if (team[i].officeNumber) {
+                    card += 
+                    `// <li class="list-group-item">Office number: ${team[i].office}</li>`
+                    console.log("Write Mgr card")
+                }
+                if (team.title === "Engineer") {
+                    `<li class="list-group-item">Github username: ${team.github}</li>`
+                    console.log("Write Eng card")
+                }
+                if (team.title === "Intern") {
+                    `<li class="list-group-item">Github username: ${team.school}</li>`
+                    console.log("Write Int card")
+        }
+        card += `
+        </div>
+        </div>
+        `
+        pageArray.push(card)
 
-// function startHTML() {
-//     const html = `<!DOCTYPE html>
-//     <html lang="en">
+        const endHTML = `
+        </div>
+        </body>
+        </html>
+        `
     
-//     <head>
-//         <meta charset="UTF-8">
-//         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         <!-- CSS only -->
-//         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-//             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-//         <title>The A Team</title>
-//     </head>
-    
-//     <body>
-//         <nav class="navbar navbar-dark bg-danger mb-5">
-//             <span class="navbar-brand mb-0 h1 w-100 p-4 text-center">The A Team Profile</span>
-//         </nav>
-//         <div class = "container-md row mx-auto">`
-// }
+        pageArray.push(endHTML);
 
-
-// function addHtml(member) {
-//                 let data = "";
-//                 if (role === "Engineer") {
-//                     const gitHub = member.getGithub();
-//                     data = `<div class = "col-4">
-//                 <div class="card mb-3" style="width: 18rem;">
-//                     <strong class="card-header bg-warning p-3 text-center">
-//                     ${name}<br/>Engineer<br/>
-//                     </strong>
-//                     <ul class="list-group list-group-flush">
-//                         <li class="list-group-item">ID : ${id}</li>
-//                         <li class="list-group-item">Email Address: ${email}</li>
-//                         <li class="list-group-item">Github username: ${github}</li>
-//                     </ul>
-//                 </div>
-//             </div>`;
-//                 } else if (role === "Intern") {
-//                     const gitHub = member.getSchool();
-//                     data = `<div class = "col-4">
-//                     <div class="card mb-3" style="width: 18rem;">
-//                     <strong class="card-header bg-warning p-3 text-center">
-//                     ${name}<br/>Engineer<br/>
-//                     </strong>
-//                     <ul class="list-group list-group-flush">
-//                         <li class="list-group-item">ID : ${id}</li>
-//                         <li class="list-group-item">Email Address: ${email}</li>
-//                         <li class="list-group-item">Github username: ${school}</li>
-//                     </ul>
-//                 </div>
-//             </div>`;
-//                 } else if (role === "Manager") {
-//                     const gitHub = member.getOffice();
-//                     data = `<div class = "col-4">
-//                 <div class="card mb-3" style="width: 18rem;">
-//                     <strong class="card-header bg-warning p-3 text-center">
-//                     ${name}<br/>Engineer<br/>
-//                     </strong>
-//                     <ul class="list-group list-group-flush">
-//                         <li class="list-group-item">ID : ${id}</li>
-//                         <li class="list-group-item">Email Address: ${email}</li>
-//                         <li class="list-group-item">Github username: ${office}</li>
-//                     </ul>
-//                 </div>
-//             </div>`;
-//             }
-//             fs.appendFile("./generated/team.html", data, function (err) {
-//                 if (err) {
-//                     return reject(err);
-//                 };
-//                 return resolve();
-//             })
-// }
-
-// function endHTML() {
-//     const html = `    </div>
-//     </body>
-    
-//     </html>`;
-//     fs.appendFile("./generated/team.html", html, function (err) {
-//         if (err) {
-//             console.log(err);
-//         };
-//     });
-// }
+        fs.writeFile(`./generated/team.html`, pageArray.join(""), function (err) {
+        })
+}}
 
 warning();
