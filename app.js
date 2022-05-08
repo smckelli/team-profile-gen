@@ -99,19 +99,19 @@ function addManager() {
     ])
     .then(function(data) {
         const name = data.name
-        console.log(data.name)
+        // console.log(data.name)
         if (data.title = "yes") {
             team.title = "Manager"
         } else {
             addManager();
         }
-        console.log(data.title)
+        // console.log(data.title)
         const id = team.length
-        console.log(team.length)
+        // console.log(team.length)
         const email = data.email
-        console.log(data.email)
+        // console.log(data.email)
         const office = data.office
-        console.log(data.office)
+        // console.log(data.office)
         const teamMate = new Manager(name, id, email, office)
         team.push(teamMate)
         addTeam();
